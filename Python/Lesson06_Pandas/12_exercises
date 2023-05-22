@@ -1,0 +1,102 @@
+#1. Załaduj zbiór danych korzystajac z biblioteki Pandas.
+#2. Osób o jakim nazwisku jest najwięcej ?
+#3. Po kolumnie z nazwiskiem dodaj kolumnę reprezentującą płeć danej osoby.
+#4. Posortuj zbiór danych alfabetycznie po nazwiskach, a w ramach jednego nazwiska po roku urodzenia.
+#5. Do zbioru danych należy dodać kolumnę, która będzie mówiła o poziomie doświadczenia danej osoby, w sposób słowny
+#6. Kolumna reprezentująca rok dołączenia do firmy ma puste wartości. Uzupełnij brakujące wartości używając
+#   średniej dla osób o takim samym poziomie doświadczenia (kolumna z Zadania 3), w skali całej firmy.
+#7. Który oddział firmy ma najwięcej Data Scientistów 
+#8. Szef chciałby zmienić nazewnictwo departamentów w całej firmie. Napisz kod, który zamieni wartości w
+kolumnie reprezentującej departament, nastepująco:
+#Software Development -> Software Development Team
+#HR -> Human Resources
+#Data Science -> Data Analytics
+#9. Które biuro firmy ma najwięcej osób na Seniorskim poziomie doświadczenia?
+#10. Które biuro ma najwięcej kobiet na Juniorskim poziomie doświadczenia?
+#11. Ile jest kobiet w krakowskim biurze, na Mid poziomie doświadczenia, urodzonych przed 1975 rokiem?
+#12. Ile osób, które posiadają obecnie stanowisko seniorskie, dołączyło do firmy w przeciągu ostatnich 10 lat?
+
+import pandas as pd
+import numpy as np
+
+#zadanie 1
+df = pd.read_csv('dataset_pandas_pd.csv', names = ['imie' , 'nazwisko' , 'rok urodzenia' , 'miesiac urodzenia' , 
+                                                  'dzien urodzenia' , 'miejsce urodzenia' , 'siedziba oddzialu' ,
+                                                  'departament' , 'rok rozpoczecia pracy' , 'miesiac rozpoczecia pracy' ,
+                                                  'dzien rozpoczecia pracy' , 'doswiadczenie (w latach)'])
+                                                  
+#zadanie 2
+df.groupby(['nazwisko'])['nazwisko'].count().sort_values(ascending = False).head(n=1)                                                  
+
+#zadanie 3
+def plec(imie):
+    return 'kobieta' if imie[-1] == 'a' else 'mezczyzna'
+
+df.insert(2 , 'plec' , df.apply(lambda x: plec(x['imie']), axis=1))  
+
+#zadanie 4
+df.sort_values(by = ['nazwisko' , 'rok urodzenia'])
+
+#zadanie 5
+def ranga(exp):
+    return 'Junior' if exp <= 3 else 'Mid' if exp in range(4,9) else 'Senior' if exp in range(9,13) else 'Expert'
+    
+df['ranga'] = df.apply(lambda x: ranga(x['doswiadczenie (w latach)']) , axis =1)
+
+#zadanie 6
+df['rok rozpoczecia pracy'] = df['rok rozpoczecia pracy'].fillna(df.groupby('ranga')['rok rozpoczecia pracy'].transform('mean'))
+
+#zadanie 7
+(
+    df.loc[df['departament'] == 'Data Science'].groupby(['siedziba oddzialu'])['departament'].
+    count().sort_values(ascending = False).head(1)
+)
+
+#zadanie 8
+def zamiana(nazwa):
+    if nazwa == 'Software Development':
+        return 'Software Development Team'
+    elif nazwa == 'HR':
+        return 'Human Resources'
+    elif nazwa == 'Data Science':
+        return 'Data Analytics'
+    else:
+        return nazwa
+
+df['departament'] = df.apply(lambda x: zamiana(x['departament']) , axis = 1)
+
+#zadanie 9
+(
+    df.loc[df['ranga'] == 'Senior'].groupby(['siedziba oddzialu'])['ranga'].
+    count().sort_values(ascending = False).head(1)
+)
+
+#zadanie 10
+#brak obserwacji spelniajacych warunki 
+df.loc[(df['ranga'] == 'Junior') & (df['plec'] == 'kobieta')]
+
+#zadanie 10 cd. - modyfikacja funkcji z zadania 5 wartosciami uzyskanymi powyzej 
+def ranga(exp):
+    return 'Junior' if exp <= 12 else 'Mid' if exp in range(12,20) else 'Senior' if exp in range(20,27) else 'Expert'
+    
+df['ranga'] = df.apply(lambda x: ranga(x['doswiadczenie (w latach)']) , axis =1)
+
+#zadanie 10 cd.
+df.loc[(df['ranga'] == 'Junior') & (df['plec'] == 'kobieta')].groupby(['siedziba oddzialu'])['siedziba oddzialu'].count().sort_values(ascending = False).head(1)
+
+#zadanie 11
+#brak obserwacji spelniajacych warunki
+df.loc[(df['siedziba oddzialu'] == 'Krakow') & (df['plec'] == 'kobieta') & (df['rok urodzenia'] < 1975)]
+
+#zadanie 12
+import datetime
+
+data = datetime.datetime.now()
+rok = data.year
+df.loc[(df['ranga'] == 'Senior') & (df['rok rozpoczecia pracy'] >= rok-10)]['imie'].count()
+
+
+
+
+
+
