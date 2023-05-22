@@ -1,0 +1,23 @@
+kraj1 = {'nazwa': 'polska', 'powierzchnia': 322_575, 'populacja': 37_019_327, 'PPP': 17_318 }
+kraj2 = {'nazwa': 'gruzja', 'powierzchnia': 69_700, 'populacja': 3_718_200, 'PPP': 4370}
+kraj3 = {'nazwa': 'włochy', 'powierzchnia':  302_073, 'populacja': 60_483_973, 'PPP': 35_914}
+kraj4 = {'nazwa': 'chiny', 'powierzchnia': 9_597_000, 'populacja': 1_411_778_724, 'PPP': 11_819}
+kraj5 = {'nazwa': 'argentyna', 'powierzchnia': 2_780_000, 'populacja': 45_864_941, 'PPP': 14_467}
+
+kraje = [kraj1, kraj2, kraj3, kraj4, kraj5]
+
+def ranking(_dict):
+    print('Kraje posortowane wzgledem powierzchni (malejące)\n')
+    for i in sorted(_dict, key = lambda x: x['powierzchnia'], reverse = True):
+        print(i['nazwa'])
+    print('\nKraje posorotwane względem populacji (malejąco)\n')
+    for i in sorted(_dict, key = lambda x: x['populacja'], reverse = True):
+        print(i['nazwa'])
+    print('\nKraje posorotwane względem gestosci zaludnienia (malejąco)\n')
+    for i in sorted(_dict, key = lambda x: x['populacja'] / x['powierzchnia'], reverse = True):
+        print(i['nazwa'])
+    print('\nKraje posortowane względem PPP (malejąco)\n')
+    for i in sorted(_dict, key = lambda x: x['PPP'], reverse = True):
+        print(i['nazwa'])
+        
+ranking(kraje)
