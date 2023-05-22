@@ -1,0 +1,45 @@
+DROP DATABASE IF EXISTS code_school;
+CREATE DATABASE IF NOT EXISTS code_school;
+USE code_school;
+DROP TABLE IF EXISTS mentorzy;
+CREATE TABLE IF NOT EXISTS mentorzy
+(
+ID INTEGER PRIMARY KEY NOT NULL,
+Imię TEXT NOT NULL,
+Nazwisko TEXT NOT NULL,
+Specjalizacja TEXT NOT NULL,
+Data_zatrudnienia DATE NOT NULL,
+Data_zwolnienia DATE
+);
+
+INSERT INTO mentorzy VALUES
+(1, 'Jan', 'Kowalski', 'Java', '2012-01-02', '2015-03-15'),
+(2, 'Janusz', 'Nowak', 'Python', '2014-04-04', '2014-12-05'),
+(3, 'Hubert', 'Nowakowski', 'Java', '2013-03-11', '2019-05-07'),
+(4, 'Janina', 'Kowalewska', 'SQL', '2016-10-09', '2020-01-07'),
+(5, 'Robert', 'Ptak', 'Tester', '2020-08-11', '2022-05-20'),
+(6, 'Patrycja', 'Iksińska', 'Java', '2018-07-12', '2022-01-02'),
+(7, 'Paweł', 'Kowalski', 'Python', '2017-11-17', '2021-02-17'),
+(8, 'Bob', 'Marley', 'SQL', '2013-12-13', '2022-06-01'),
+(9, 'James', 'Bond', 'Tester', '2010-03-04', '2020-09-11'),
+(10, 'Janusz', 'Travolta', 'Python', '2011-02-12', '2013-06-25');
+
+SELECT * FROM mentorzy;
+
+UPDATE mentorzy SET
+Nazwisko = 'Bucka' WHERE ID = 5;
+
+SELECT * FROM mentorzy WHERE ID = 5;
+
+UPDATE mentorzy SET
+Specjalizacja = 'grzebanie palcem w dupie' WHERE ID = 9;
+
+SELECT * FROM mentorzy WHERE ID = 9; 
+
+ALTER TABLE mentorzy
+ADD COLUMN Wynagrodzenie FLOAT NOT NULL;
+
+UPDATE mentorzy SET
+Wynagrodzenie = 1000.00 WHERE ID <= 3;
+
+SELECT * FROM mentorzy WHERE ID <= 3;
