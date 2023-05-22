@@ -1,0 +1,34 @@
+#Zaimplementuj klasę bazową Figura. Klasa będzie mieć metody obliczające pole i obwod. Stwórz klasy reprezentujące trójkąt i prostokąt, implementujące odpowiednio obie metody.
+
+from abc import ABC, abstractmethod
+
+class Figura(ABC):
+    @abstractmethod
+    def pole():
+        pass
+    def obwod():
+        pass
+        
+class Prostokat(Figura):
+    def __init__(self , a , b):
+        self.a = a
+        self.b = b
+        
+    def pole(self):
+        return self.a * self.b
+    
+    def obwod(self):
+        return 2 * self.a + 2 * self.b
+        
+class Trojkat(Figura):
+    def __init__(self, a , b , c , h):
+        self.a = a
+        self.b = b
+        self.c = c
+        self.h = h
+    
+    def pole(self):
+        return self.a * self.h / 2
+    
+    def obwod(self):
+        return self.a + self.b + self.c
