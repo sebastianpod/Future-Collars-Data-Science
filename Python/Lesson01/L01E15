@@ -1,0 +1,7 @@
+#Napisz funkcję przyjmującą jeden parametr list zawierający liczby całkowite i zwracającą element, który pojawia się na liście najczęściej.
+
+def most_common(lista):
+    wartosci = {}
+    for i in lista:
+        wartosci[lista.count(i)] = i
+    return (wartosci[max(wartosci)])
