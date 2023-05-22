@@ -1,0 +1,50 @@
+DROP DATABASE IF EXISTS pracownicy;
+CREATE DATABASE IF NOT EXISTS pracownicy;
+USE pracownicy;
+DROP TABLE IF EXISTS pracownicy;
+CREATE TABLE IF NOT EXISTS pracownicy
+(
+id INTEGER PRIMARY KEY AUTO_INCREMENT,
+imie TEXT,
+nazwisko TEXT,
+wiek INTEGER,
+kurs TEXT
+);
+
+INSERT INTO Pracownicy (Imie, Nazwisko, Wiek, Kurs)
+	VALUES
+('Anna','NOWAK', 34, 'DS.'),
+('Roman', 'KOWALSKI', 42, 'DS.'),
+('Tomasz', 'WIŚNIEWSKI', 33, 'DS.'),
+('Agata', 'WÓJCIK', 43,	'DS.'),
+('Elżbieta', 'KOWALCZYK', 28, 'Java'),
+('Przemysław', NULL, 34, 'Java'),
+('Robert', NULL, 35, 'Java'),
+('Radosław', 'ZIELIŃSKI', 38, 'Java'),
+(NULL, 'WOŹNIAK',	26,	'Java'),
+('Robert', 'SZYMAŃSKI',	34,	'Java'),
+('Radosław', 'DĄBROWSKI', 35, NULL),
+('Robert', 'KOZŁOWSKI',	NULL, 'UX'),
+('Joanna', 'MAZUR',	26,	'UX'),
+('Radosław', 'JANKOWSKI', 27, 'UX'),
+('Patryk', 'LEWANDOWSKI', 28, 'Tester'),
+(NULL, 'ZIELIŃSKI',	28,	'Tester'),
+('Andrzej',	'WOŹNIAK', 31, 'Tester'),
+('Andrzej', 'LEWANDOWSKI', '30', 'Tester'),
+('Roman', 'ZIELIŃSKI', 39, 'Tester'),
+('Ewa', 'WOŹNIAK', 31, 'Tester');
+
+SELECT * FROM pracownicy WHERE imie LIKE 'Anna';
+
+SELECT * FROM pracownicy WHERE imie IS NULL;
+
+SELECT kurs FROM pracownicy WHERE wiek BETWEEN 30 AND 40;
+
+SELECT wiek FROM pracownicy WHERE id <= 7;
+
+SELECT * FROM pracownicy WHERE wiek IS NULL;
+
+ALTER TABLE pracownicy
+RENAME COLUMN kurs TO szkolenie;
+
+SELECT * FROM pracownicy LIMIT 3;
