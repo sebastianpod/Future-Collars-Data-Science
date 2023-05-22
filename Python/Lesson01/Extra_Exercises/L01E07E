@@ -1,0 +1,15 @@
+#Stwórz abstrakcyjną klasę bazową reprezentującą zwierzę. Konstruktor klasy będzie przyjmować parametr reprezentujący imię zwierzęcia. Klasa będzie mieć 2 metody. Jedna metoda daj_glos będzie abstrakcyjna. 
+#Druga metoda powitanie będzie wyświetlać napis, składający się z wartości zwracanej przez daj_glos, z wyświetlenia imienia zwierzęcia oraz z wyświetlenia jakiego typu (atrybut typ dla klasy) jest zwierzę.
+
+from abc import ABC, abstractmethod
+
+class Zwierzeta(ABC):
+    def __init__(self , imie):
+        self.imie = imie
+    
+    @abstractmethod
+    def daj_glos(self):
+        pass
+    
+    def powitanie(self):
+        return f'Typ: {self.typ}, imie: {self.imie}, glos: {self.daj_glos()}'
