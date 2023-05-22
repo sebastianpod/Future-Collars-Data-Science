@@ -1,0 +1,6 @@
+#Napisz funkcję, która przyjmie słownik mapujący imiona na wzrost, a następnie zwróci listę zawierającą imiona posortowane według wzrostu malejąco.
+
+_dict = {'imie' : ['janek' , 'bogdan' , 'stefan' , 'borubar'] , 
+     'wzrost' : [178 , 188, 200, 190]}
+def sortowanie(_dict):
+    return [j for i,j in sorted(zip(_dict['wzrost'],_dict['imie']), reverse = True)]
