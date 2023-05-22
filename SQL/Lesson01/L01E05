@@ -26,7 +26,7 @@ ADD COLUMN data_zatrudnienia DATE;
 
 INSERT INTO workers_list (imie , nazwisko , stanowisko , dzial , data_zatrudnienia)
 	VALUES
-('Andrzej' , 'Adamczyk' , 'Pijak' , 'Bar' , '2022-01-03');
+('Andrzej' , 'Adamczyk' , 'Operator' , 'Produkcja' , '2022-01-03');
 
 SELECT * FROM workers_list;
 
