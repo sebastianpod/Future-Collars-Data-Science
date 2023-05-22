@@ -1,0 +1,141 @@
+DROP DATABASE IF EXISTS firma;
+CREATE DATABASE IF NOT EXISTS firma;
+USE kurs;
+DROP TABLE IF EXISTS hr;
+CREATE TABLE IF NOT EXISTS hr
+(
+id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
+nazwisko TEXT,
+imie TEXT,
+wiek INTEGER,
+departament TEXT,
+pensja FLOAT,
+staz INTEGER
+);
+
+INSERT INTO hr (nazwisko , imie , wiek , departament , pensja , staz)
+	VALUES
+('Nowak',	'Michał',	33,	'finanse',	3057,	8),
+('Kowalczyk',	'Piotr',	43	,'kadry',	4831,	18),
+('Wójcik',	'Marcin',	27,	'marketing',	3312,	11),
+('Woźniak',	'Paweł',	31,	'zaopatrzenie',	1648,	3),
+('Krawczyk',	'Tomasz',	55,	'produkcja',	'2767',	12),
+('Kowalski',	'Łukasz',	46,	'finanse',	3374,	4),
+('Dąbrowski',	'Maciej',	44,	'marketing',	3400,	12),
+('Mazur',	'Krzysztof',	25,	'marketing',	3030,	5),
+('Pietrzak',	'Jakub',	34,	'kadry',	3507,	13),
+('Stępień',	'Adam',	45,	'finanse',	4413,	19),
+('Wiśniewski',	'Rafał',	43,	'finanse',	2192,	1),
+('Włodarczyk',	'Grzegorz',	40,	'kadry',	2178,	5),
+('Pawlak',	'Andrzej',	29,	'kadry',	2623,	15),
+('Wieczorek',	'Wojciech',	41,	'marketing',	4246,	18),
+('Kamiński',	'Marek',	31,	'marketing',	4077,	16),
+('Marciniak',	'Kamil',	37,	'zaopatrzenie',	3156,	14),
+('Zając',	'Jan',	55,	'produkcja',	3687,	6),
+('Michalak',	'Mateusz',	32,	'produkcja',	3764,	1),
+('Kozłowski',	'Jacek',	31,	'zaopatrzenie',	4279,	15),
+('Zieliński',	'Bartosz',	59,	'produkcja',	4105,	11),
+('Adamczyk',	'Przemysław',	46,	'marketing',	2012,	16),
+('Król',	'Robert',	39,	'produkcja',	2582,	2),
+('Szewczyk',	'Mariusz',	37,	'zaopatrzenie',	3957,	7),
+('Walczak',	'Artur',	32,	'marketing',	4051,	18),
+('Lewandowski',	'Karol',	29,	'marketing',	3837,	14),
+('Wróbel',	'Jarosław',	30,	'zaopatrzenie',	2039,	17),
+('Szymański',	'Konrad',	34,	'produkcja',	4076,	18),
+('Piotrowski',	'Bartłomiej',	43,	'kadry',	4784,	19),
+('Wojciechowski',	'Radosław',	47,	'zaopatrzenie',	4082,	10),
+('Bąk',	'Dariusz',	42,	'produkcja',	2831,	6),
+('Mazurek',	'Sebastian',	31,	'produkcja',	4439,	6),
+('Cieślak',	'Daniel',	27,	'produkcja',	3449,	20),
+('Kwiatkowski',	'Arkadiusz',	40,	'kadry',	3791,	13),
+('Kurek',	'Jerzy',	43,	'produkcja',	4912,	9),
+('Sobczak',	'Sławomir',	32,	'produkcja',	4299, 4),
+('Pawłowski',	'Aleksander',	35,	'produkcja',	2633,	1),
+('Markiewicz',	'Szymon',	51,	'finanse',	3410,	1),
+('Kołodziejczyk',	'Dominik',	44,	'produkcja',	3222,	11),
+('Kaczmarek',	'Filip',	21,	'produkcja',	3275,	14),
+('Dudek',	'Zbigniew',	28, 'produkcja',	3097,	11),
+('Grabowski',	'Sebastian',	45,	'produkcja',	3180,	2),
+('Malinowski',	'Stanisław',	32,	'finanse',	3949,	19),
+('Mróz',	'Damian',	33,	'produkcja',	3818,	19),
+('Nowakowski',	'Adrian',	60, 'produkcja',	4097,	1),
+('Jankowski',	'Hubert',	32,	'produkcja', 1878,	1),
+('Majewski',	'Cezary',	33,	'finanse',	4340,	17),
+('Olszewski',	'Janusz',	43,	'produkcja',	3025,	17),
+('Kacprzak',	'Patryk',	21,	'produkcja',	4151,	15),
+('Szymczak',	'Leszek',	22,	'produkcja',	4001,	17),
+('Lis',	'Dawid',	28,	'marketing',	2288,	20);
+
+SELECT * FROM hr;
+
+SELECT departament FROM hr LIMIT 5;
+
+SELECT imie, nazwisko FROM hr LIMIT 10;
+
+SELECT * FROM hr LIMIT 20;
+
+SELECT * FROM hr WHERE departament LIKE 'kadry';
+
+SELECT wiek FROM hr WHERE departament = 'produkcja';
+
+SELECT nazwisko FROM hr WHERE departament != 'finanse';
+
+SELECT * FROM hr WHERE departament LIKE 'marketing' AND wiek < 30;
+
+SELECT * FROM hr WHERE imie LIKE 'Arkadiusz' AND wiek BETWEEN 30 AND 40;
+
+SELECT * FROM hr WHERE departament NOT LIKE 'produkcja' AND departament != 'kadry';
+
+SELECT * FROM hr WHERE wiek BETWEEN 30 AND 50 AND departament LIKE 'finanse' OR departament LIKE 'produkcja';
+
+SELECT imie, departament FROM hr WHERE staz >= 10 OR pensja BETWEEN 4000 AND 5000;
+
+SELECT COUNT(departament) FROM hr WHERE staz >= 10 OR pensja BETWEEN 4000 AND 5000;
+
+SELECT imie, departament FROM hr WHERE staz > 10 XOR pensja BETWEEN 4000 AND 5000;
+
+SELECT COUNT(imie) FROM hr WHERE staz > 10 XOR pensja BETWEEN 4000 AND 5000;
+
+SELECT imie, nazwisko, departament, pensja AS 'wynagrodzenie' FROM hr;
+
+SELECT COUNT(*) AS 'Liczba pracownikow w dziale finanse' FROM (SELECT departament AS dzial FROM hr) AS temp WHERE temp.dzial = 'finanse'; 
+
+SELECT * FROM hr WHERE imie LIKE 'Mi%';
+
+SELECT * FROM hr WHERE nazwIsko LIKE 'a%';
+
+SELECT DISTINCT departament FROM hr;
+
+SELECT COUNT(DISTINCT imie) FROM hr;
+
+SELECT * FROM hr ORDER BY nazwisko;
+
+SELECT * FROM hr ORDER BY departament, pensja DESC;
+
+SELECT departament, ROUND(AVG(pensja),2) AS 'średnia oensja dla każdego działu' FROM hr GROUP BY departament;
+
+SELECT departament, MAX(staz) AS 'max_staz', MIN(staz) AS 'min_staz' FROM hr GROUP BY departament;
+
+SELECT departament, staz, COUNT(*) AS 'liczba prownikow' FROM hr GROUP BY departament, staz ORDER BY departament;
+
+SELECT departament, COUNT(*) AS 'Count' 
+FROM hr
+WHERE pensja <= 3000 AND staz <= 10
+GROUP BY departament
+ORDER BY Count DESC;
+
+SELECT departament, COUNT(*) AS 'Count', AVG(wiek) AS Sredni_wiek, AVG(pensja) AS 'Srednie_wynagrodzenie', AVG(staz) AS 'Sredni staz'
+FROM hr
+WHERE staz >= 10 AND pensja BETWEEN 4000 AND 5000
+GROUP BY departament
+HAVING Count(*) > 2
+ORDER BY Sredni_wiek DESC; 
+
+SELECT imie, nazwisko,
+	CASE
+		WHEN staz < 3 THEN 'junior'
+		WHEN staz BETWEEN 10 AND 15 THEN 'senior'
+        ELSE 'mid'
+	END AS Ranga
+FROM hr
+ORDER BY Ranga DESC;
