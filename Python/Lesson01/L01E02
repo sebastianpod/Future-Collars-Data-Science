@@ -1,3 +1,4 @@
+#Napisz funkcję, która wypisze wszystkie liczby pierwsze mniejsze od liczby będącej argumentem funkcji.
 def liczby_pierwsze(n):
     sito = [True for i in range(n)]
     lista = []
