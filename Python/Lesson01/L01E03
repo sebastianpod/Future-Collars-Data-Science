@@ -1,0 +1,5 @@
+def sorting(x):
+    posorotwane = []
+    x.sort()
+    posortowane = x
+    return posorotwane
