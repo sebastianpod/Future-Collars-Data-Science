@@ -1,3 +1,4 @@
+#Napisz funkcję, która dla dwóch list liczbowych zwróci listę zawierającą tylko te elementy, które należą do obydwu list wejściowych.
 def common_elements(list1, list2):
   result = []
   for element in list1:
