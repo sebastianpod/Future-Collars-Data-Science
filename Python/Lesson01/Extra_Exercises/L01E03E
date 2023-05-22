@@ -1,0 +1,8 @@
+#Stwórz klasę przyjmującą w konstruktorze listę będącą kolejnymi wierszami piosenki. Klasa będzie mieć metodę spiewaj, która wypisze wszystkie wiersze piosenki po kolei.
+
+class Piosenka():
+    def __init__(self,wiersze):
+        self.wiersze = wiersze
+        
+    def spiewaj(self):
+        for i in self.wiersze: print(i)  
