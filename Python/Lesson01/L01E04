@@ -1,0 +1,11 @@
+def czesc_wspolna(a,b):
+    c = []
+    if len(a) >= len(b):
+        for i in range(len(a)):
+            if a[i] in b:
+                c.append(a[i])
+    else:
+        for i in range(len(b)):
+            if b[i] in a:
+                c.append(b[i])
+    return list(dict.fromkeys(c))   
