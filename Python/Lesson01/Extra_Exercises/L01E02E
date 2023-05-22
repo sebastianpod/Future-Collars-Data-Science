@@ -1,0 +1,13 @@
+#Stwórz klasę Trójkat, w której konstruktor przyjmuje 3 argumenty, reprezentujące kąty trójkąta. Klasa implementuje metodę sprawdz_katy, która sprawdzi, czy suma kątow jest równa 180.
+
+class Trojkat():
+    def __init__(self, alfa, beta, gamma):
+        self.alfa = alfa
+        self.beta = beta
+        self.gamma = gamma
+    
+    def check(self):
+        return self.alfa + self.beta + self.gamma == 180
+    
+moj_trojkat = Trojkat(90,60,90)
+print(moj_trojkat.check())
