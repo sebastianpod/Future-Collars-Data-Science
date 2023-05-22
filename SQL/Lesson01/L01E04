@@ -1,0 +1,37 @@
+ROP DATABASE IF EXISTS gift_list;
+CREATE DATABASE IF NOT EXISTS gift_list;
+USE gift_list;
+DROP TABLE IF EXISTS gifts;
+CREATE TABLE IF NOT EXISTS gifts
+(
+id INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,
+imie TEXT NOT NULL,
+pomysl TEXT NOT NULL,
+cena FLOAT NOT NULL,
+sklep TEXT NOT NULL
+);
+
+INSERT INTO gifts (imie, pomysl, cena, sklep) VALUES
+('Jan', 'Golarka', 220.99, 'Allegro'),
+('Janina', 'Lokówka', 440.10, 'Media Markt'),
+('Stefan', 'Dron', 1000.00, 'Amazon'),
+('Anna', 'Perfumy', 300.33, 'Sephora'),
+('Lidia', 'Sukienka', 540.00, 'Zalando');
+
+SELECT * FROM gifts;
+
+UPDATE gifts SET
+pomysl = 'Rower' WHERE id = 3;
+
+SELECT pomysl FROM gifts WHERE id = 3;
+
+DELETE FROM gifts WHERE id = 1;
+
+SELECT * FROM gifts;
+
+ALTER TABLE gifts 
+DROP COLUMN sklep;
+
+SELECT * FROM gifts;
+
+SELECT imie FROM gifts WHERE id IN (3, 4, 5);
