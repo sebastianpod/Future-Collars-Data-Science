@@ -1,0 +1,7 @@
+#Napisz funkcję, która sprawdzi, czy 2 napisy są palindromami.
+
+def palindromy(_str1, _str2):
+    if _str1 == _str1[::-1] and _str2 == _str2[::-1]:
+        return True
+    else:
+        return False
