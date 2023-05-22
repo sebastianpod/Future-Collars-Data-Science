@@ -1,0 +1,42 @@
+	DROP DATABASE IF EXISTS library;
+    CREATE DATABASE IF NOT EXISTS library;
+    USE library;
+    DROP TABLE IF EXISTS biblioteczka;
+    CREATE TABLE IF NOT EXISTS biblioteczka
+    (
+    id INTEGER PRIMARY KEY NOT NULL,
+    tytul TEXT NOT NULL,
+    data_zakupu DATE
+    );
+    
+    INSERT INTO biblioteczka
+    VALUES
+    (1, 'Podróż do kresu nocy','2021-11-12');
+    
+    SELECT * FROM biblioteczka;
+    
+    INSERT INTO biblioteczka
+    VALUES
+	(2, 'Ferdydurke', '2018-03-01'),
+	(3, 'Dżuma', '2015-06-12');
+    
+    UPDATE biblioteczka SET
+    Tytuł = 'Nad Niemnem', Data_zakupu = '2010-10-10'
+    WHERE id = 1;
+    
+    SELECT * FROM biblioteczka;
+    
+    ALTER TABLE biblioteczka
+    ADD COLUMN autor TEXT;
+    
+    SELECT * FROM biblioteczka;
+    
+	UPDATE Biblioteczka SET Autor = 'Orzeszkowa' WHERE id = 1;
+	UPDATE Biblioteczka SET Autor = 'Gombrowicz' WHERE id = 2;
+	UPDATE Biblioteczka SET Autor = 'Camus' WHERE id = 3;
+    
+    SELECT * FROM biblioteczka;
+    
+    DELETE FROM biblioteczka WHERE id > 1;
+    
+    SELECT * FROM biblioteczka;
