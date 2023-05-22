@@ -1,0 +1,36 @@
+DROP DATABASE IF EXISTS hobbies;
+CREATE DATABASE IF NOT EXISTS hobbies;
+USE hobbies;
+DROP TABLE IF EXISTS my_hobbies;
+CREATE TABLE IF NOT EXISTS my_hobbies
+(
+id INTEGER PRIMARY KEY AUTO_INCREMENT,
+nazwa TEXT,
+opis TEXT,
+data_realizacji DATE
+);
+
+INSERT INTO my_hobbies (nazwa , opis) 
+	VALUES
+('Książki', 'Literatura XX wieku'),
+('Historia', 'II wojna światowa'),
+('Technologie', 'AI'),
+('Podróże', 'Włochy'),
+('Rekreacja', 'Wycieczki rowerowe');
+
+SELECT * FROM my_hobbies;
+
+INSERT INTO my_hobbies (nazwa , opis , data_realizacji)
+	VALUES
+('Sport' , 'Golf' , '2023-04-06');
+
+SELECT * FROM my_hobbies;
+
+UPDATE my_hobbies SET
+data_realizacji = '2022-09-12' WHERE id = 4;
+
+SELECT * FROM my_hobbies;
+
+DELETE FROM my_hobbies WHERE data_realizacji IS NULL;
+
+SELECT * FROM my_hobbies;
