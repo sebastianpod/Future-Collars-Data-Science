@@ -1,11 +1,6 @@
-def czesc_wspolna(a,b):
-    c = []
-    if len(a) >= len(b):
-        for i in range(len(a)):
-            if a[i] in b:
-                c.append(a[i])
-    else:
-        for i in range(len(b)):
-            if b[i] in a:
-                c.append(b[i])
-    return list(dict.fromkeys(c))   
+def common_elements(list1, list2):
+  result = []
+  for element in list1:
+      if element in list2:
+          result.append(element)
+  return result
