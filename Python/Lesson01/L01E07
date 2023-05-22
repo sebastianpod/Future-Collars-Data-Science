@@ -1,0 +1,11 @@
+#Napisz funkcję przyjmujacą napis i zwracającą informacje ile liter i cyfr jest w napisie.
+
+def zliczanie_znakow(x):
+    a = 0
+    b = 0
+    for i in range(len(x)):
+        if x[i].isnumeric():
+            a += 1
+        elif x[i].isalpha():
+            b += 1
+    return a,b
