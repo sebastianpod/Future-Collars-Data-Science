@@ -1,0 +1,46 @@
+#Stwórz klasę reprezentującą wielokąt i przyjmującą w konstruktorze listę kolejnych linii (obiekty klasy z poprzedniego zadania), reprezentujących kolejne boki wielokąta. 
+#Klasa powinna sprawdzić, czy dane są poprawne (czy każda linia kończy się tam, gdzie zaczyna następna). Klasa wielokąta implementuje również metodę obliczającą obwód.
+
+import math
+
+class LiniaProsta:
+    ob = []
+    def __init__(self, x1, y1, x2, y2):
+        self.x1 = x1
+        self.y1 = y1
+        self.x2 = x2
+        self.y2 = y2
+               
+    def dlugosc_prostej(self):
+        self.ob.append(math.sqrt((self.x2 - self.x1)**2 + (self.y2 - self.y1)**2))
+        return math.sqrt((self.x2 - self.x1)**2 + (self.y2 - self.y1)**2)
+    
+class Wielokat(LiniaProsta):
+    linie = []
+    def __init__(self, x1, y1, x2, y2):
+        super().__init__(x1, y1, x2, y2)
+        self.wspolrzedne = [[x1 , y1] , [x2 , y2]]
+        
+    def dodaj_linie(self):       
+        self.linie.append(self.wspolrzedne)
+        return self.linie
+        
+    def test(self):
+        j = 0
+        cont = []
+        for i in range(0,len(self.linie)-1):
+            if self.linie[j][1] == self.linie[j+1][0]:
+                cont.append(True)
+            else:
+                cont.append(False)
+            j += 1
+        if self.linie[len(self.linie)-1][1] == self.linie[0][0]:
+            cont.append(True)
+        else:
+            cont.append(False)
+        return ('Podane linie nie tworzą zamkniętego konturu' 
+                if False in cont else 
+                'Podane linie tworzą zamkniety kontur')
+    
+    def obwod(self):
+        return sum(self.ob)
