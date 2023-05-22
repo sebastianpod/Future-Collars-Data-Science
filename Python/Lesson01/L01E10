@@ -1,0 +1,8 @@
+#Napisz funkcję, która przyjmie dwie listy liczb całkowitych, i zwróci listę liczb występujących w pierwszej i nie występujących w drugiej liście, posortowana rosnąco względem ilości wystąpień w pierwszej liście.
+
+def roznica_list(lista1, lista2):
+    roznica = []
+    for element in lista1:
+        if element not in lista2:
+            roznica.append(element)
+    return sorted(roznica, key=lista1.count)
