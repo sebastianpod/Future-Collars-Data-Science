@@ -1,0 +1,36 @@
+#Stwórz klasy potomne dla klasy bazowej zwierzęcia, reprezentujące psa i kota. W konstruktorze każdej z nich ustaw odpowiednio zmienną reprezentującą typ zwierzęcia. 
+#Zaimplementuj odpowiednio metodę daj_głos w każdej z klas potomnych. Sprawdź, czy obiekty stworzone z klas Pies i Kot potrafią poprawnie się przywitać.
+
+from abc import ABC, abstractmethod
+
+class Zwierzeta(ABC):
+    def __init__(self , imie , typ):
+        self.imie = imie
+        self.typ = typ
+        
+    @abstractmethod
+    def daj_glos(self):
+        pass
+    
+    def powitanie(self):
+        return f'Typ: {self.typ}, imie: {self.imie}, glos: {self.daj_glos()}'
+        
+class Pies(Zwierzeta):
+    def __init__(self, imie , typ):
+        super().__init__(imie , typ)
+                    
+    def daj_glos(self):
+        return 'hau hau'
+
+p = Pies('Szarik' , 'pies')
+p.powitanie()
+
+class Kot(Zwierzeta):
+    def __init__(self, imie , typ):
+        super().__init__(imie , typ)
+        
+    def daj_glos(self):
+        return 'miau miau'
+
+k = Kot('Filemon' , 'kot')
+k.powitanie()
