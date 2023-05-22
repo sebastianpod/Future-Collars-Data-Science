@@ -1,0 +1,6 @@
+#Napisz funkcję, która zwróci które urodziny będą obchodziły w tym roku osoby urodzone w latach podanych w liście będącej argumentem wejściowym danej funkcji
+def ktore_urodziny(curr_year, lista):
+    wiek = []
+    for i in range(len(lista)):
+        wiek.append((curr_year - lista[i]))
+    return wiek
