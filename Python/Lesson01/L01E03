@@ -1,3 +1,4 @@
+#Napisz funkcję, która posortuje listę liczb w porządku niemalejącym.
 def sorting(x):
     posorotwane = []
     x.sort()
