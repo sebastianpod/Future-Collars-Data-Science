@@ -1,0 +1,2 @@
+def podzielnosc(a, b):
+    print(a % b == 0)
