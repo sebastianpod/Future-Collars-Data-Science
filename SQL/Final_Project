@@ -1,0 +1,175 @@
+DROP DATABASE IF EXISTS sklep_odziezowy;
+CREATE DATABASE IF NOT EXISTS sklep_odziezowy;
+
+USE sklep_odziezowy;
+
+DROP TABLE IF EXISTS producenci;
+CREATE TABLE IF NOT EXISTS producenci
+(
+id_producenta INTEGER PRIMARY KEY AUTO_INCREMENT,
+nazwa_producenta TEXT NOT NULL,
+adres_producenta TEXT NOT NULL,
+nip TEXT(10) NOT NULL,
+data_podpisania_umowy DATE NOT NULL
+);
+
+DROP TABLE IF EXISTS produkty;
+CREATE TABLE IF NOT EXISTS produkty
+(
+id_produktu INTEGER PRIMARY KEY AUTO_INCREMENT,
+id_producenta INTEGER,
+nazwa_produktu TEXT NOT NULL,
+opis_produktu TEXT NOT NULL,
+vat_perc INTEGER NOT NULL,
+vat_dec DECIMAL(3,2) GENERATED ALWAYS AS (vat_perc / 100),
+cena_netto_zakupu DECIMAL(7,2) NOT NULL,
+cena_brutto_zakupu DECIMAL(7,2) GENERATED ALWAYS AS (cena_netto_zakupu + (cena_netto_zakupu* vat_dec)) STORED,
+cena_netto_sprzedazy DECIMAL(7.2) NOT NULL,
+cena_brutto_sprzedazy DECIMAL(7,2) GENERATED ALWAYS AS (cena_netto_sprzedazy + (cena_netto_sprzedazy * vat_dec)) STORED,
+CONSTRAINT producent_fk FOREIGN KEY (id_producenta) REFERENCES producenci(id_producenta)
+);
+
+DROP TABLE IF EXISTS zamowienia;
+CREATE TABLE IF NOT EXISTS zamowienia
+(
+id_zamowienia INTEGER PRIMARY KEY AUTO_INCREMENT,
+id_klienta INTEGER,
+id_produktu INTEGER,
+data_zamowienia DATE NOT NULL
+);
+
+DROP TABLE IF EXISTS klienci;
+CREATE TABLE IF NOT EXISTS klienci
+(
+id_klienta INTEGER PRIMARY KEY AUTO_INCREMENT,
+id_zamowienia INTEGER,
+imie TEXT NOT NULL,
+nazwisko TEXT NOT NULL,
+adres TEXT NOT NULL
+);
+
+INSERT INTO producenci
+	(nazwa_producenta, adres_producenta, nip, data_podpisania_umowy)
+VALUES
+	('Nike', '00-950 Warszawa, ul. Biała 24', '1122334455', '2020-01-29'),
+	('Adidas', '40-999 Katowice, ul. Zielona 44', '2233445566', '2018-03-15'),
+	('Puma', '30-333 Poznań, ul. Czarna 15A', '3344556677', '2021-05-18'),
+	('Kappa', '21-444 Gdańsk, ul. Czerwona 55', '4455667788', '2017-01-02');
+    
+INSERT INTO produkty 
+	(id_producenta, nazwa_produktu, opis_produktu, vat_perc, cena_netto_zakupu, cena_netto_sprzedazy)
+VALUES
+	(4, 'Bokserki czarne', 'Bokserki męskie, rozmiar L', 23, 25.00, 36.59),
+    (2, 'Skarpetki długie', 'Skarpetki Unisex, rozmiar 39, białe', 23, 8.00, 12.19),
+	(1, 'T-Shirt Nadruk wzór 1', 'T-Shirt czerowny z nadrukiem, poliester', 23, 32.00, 40.65),
+	(1, 'T-Shirt Nadruk wzór 2', 'T-Shirt czerowny z nadrukiem, bawełna', 23, 40.00, 51.21),
+	(1, 'Buty trekkingowe wysokie', 'Buty skórzane, wzmocnione', 23, 250.00, 325.20),
+	(1, 'Kurtka zimowa', 'Kurta damska, puchowa', 23, 300.00, 405.69),
+	(3, 'Bluza zapinana', 'Bluza męska, piłkarska', 23, 100.00, 161.79),
+	(3, 'Bluza z kaputer', 'Bluza Unisex z kapturem', 23, 120.00, 178.86),
+	(3, 'Bluza z nadrukiem', 'Bluza unisex z nadrukiem', 23, 100.00, 161.79),
+	(3, 'Kurtka przeciwdeszczowa', 'Kurtka przeciwdeszczowa meska', 23, 150.00, 186.98),
+	(3, 'Bluza polar', 'Bluza z polaru damska', 23, 75.00, 81.29),
+	(2, 'Spodnie dresowe', 'Spodnie dresowe czarne', 23, 30.00, 48.77),
+	(2, 'Spodnie termiczne', 'Czarne, męskie, rozmiar L', 23, 25.00, 40.64),
+	(2, 'Bluzka długi rękaw', 'Longsleeve, biały, męski', 23, 20.00, 32.51),
+	(1, 'Kurtka wiatrówka', 'Kurtka szara, damska', 23, 50.00, 73.16),
+	(4, 'Skarpetki 3 pack', '3 pary skarpetek długich', 23, 10.00, 16.25),
+	(4, 'Podkoszulek', 'Podkoszulek szary, męski, rozmiar M', 23, 5.00, 12.20),
+	(4, 'Czapka z daszkiem', 'Czapka z daszkiem, nadruk', 23, 22.00, 32.51),
+	(2, 'Czapka zimowa', 'Czapka zimowa z pomponem', 23, 18.00, 24.38),
+	(2, 'Buty korki', 'Korki edycja limitowana', 23, 260.00, 357.72);
+    
+INSERT INTO zamowienia
+	(id_klienta, id_produktu, data_zamowienia)
+VALUES
+	(3, 15, '2022-03-01'),
+	(4, 8, '2022-03-25'),
+	(10, 20, '2022-04-05'),
+	(7, 2, '2022-04-05'),
+	(2, 7, '2022-04-07'),
+	(6, 1, '2022-04-10'),
+	(9, 20, '2022-04-20'),
+	(5, 10, '2022-05-06'),
+	(8, 20, '2022-05-06'),
+	(1, 9, '2022-05-06');
+
+INSERT INTO klienci
+	(id_zamowienia, imie, nazwisko, adres)
+VALUES
+	(10, 'Jan', 'KOWALSKI', '00-444 Warszawa, ul. Długa 2/4'),
+	(5, 'Janusz', 'NOWAK', '11-111 Poznań, ul. Krótka 12'),
+	(1, 'Janina', 'BĄK', '12-122 Katowice, ul. Szybowa 1A'),
+	(2, 'Hubert', 'SUPER', '44-444 Szczecin, ul. Sucha 8'),
+	(8, 'Anna', 'KOWALEWSKA', '22-222 Chrzanów, ul. Urocza 12/2'),
+	(6, 'Justyna', 'IKSIŃSKA', '31-456 Rzeszów, ul. Średnia 15'),
+	(4, 'Andrzej', 'IBISZ', '09-944 Gdańsk, ul. Żurawia 2/22'),
+	(9, 'Halina', 'DZIK', '00-444 Warszawa, ul. Radosna 1'),
+	(7, 'Stefan', 'MALUTKI', '12-122 Katowice, ul. Górnicza 13/14'),
+	(3, 'Franciszek', 'PERSON', '44-444 Szczecin, ul. Morska 12A');
+
+ALTER TABLE zamowienia 
+ADD FOREIGN KEY 
+(id_produktu) REFERENCES Produkty(id_produktu);
+
+ALTER TABLE zamowienia
+ADD FOREIGN KEY 
+(id_klienta) REFERENCES Klienci(id_klienta);
+
+SELECT pr.nazwa_producenta , p.*   
+FROM produkty AS p, producenci AS pr
+WHERE p.id_producenta = pr.id_producenta AND p.id_producenta = 1
+ORDER BY nazwa_produktu;
+
+SELECT AVG(pr.cena_brutto_sprzedazy) AS 'Srednia cena produktow producenta 1'
+FROM produkty AS pr, producenci AS p
+WHERE pr.id_producenta = p.id_producenta AND pr.id_producenta = 1;
+
+WITH sr AS
+(
+SELECT AVG(p.cena_netto_zakupu) AS pr1
+FROM produkty AS p
+WHERE id_producenta = 1
+)
+SELECT p.nazwa_producenta, pr.cena_netto_zakupu,
+	CASE
+		WHEN pr.cena_netto_zakupu >= sr.pr1 THEN 'drogie'
+		ELSE 'Tanie'
+	END AS 'Klasyfikacja'
+FROM producenci AS p, produkty AS pr, sr
+WHERE pr.id_producenta = p.id_producenta AND pr.id_producenta = 1
+ORDER BY cena_netto_zakupu;
+
+SELECT DISTINCT pr.nazwa_produktu AS 'nazwa produktu'
+FROM produkty AS pr, zamowienia AS z
+WHERE z.id_produktu = pr.id_produktu;
+
+SELECT pr.nazwa_produktu AS 'nazwa produktu'
+FROM produkty AS pr, zamowienia AS z
+WHERE z.id_produktu = pr.id_produktu
+LIMIT 5;
+
+SELECT SUM(pr.cena_netto_sprzedazy) AS 'Laczna cena zamowien'
+FROM produkty AS pr, zamowienia AS z
+WHERE z.id_produktu = pr.id_produktu;
+
+SELECT z.*, pr.nazwa_produktu AS 'Nazwa produktu'
+FROM zamowiEnia AS z, produkty AS pr
+WHERE z.id_produktu = pr.id_produktu
+ORDER BY z.data_zamowienia DESC;
+
+SELECT COUNT(*) AS 'Ile pustych'
+FROM produkty
+WHERE id_produktu IS NULL OR id_producenta IS NULL OR nazwa_produktu IS NULL OR opis_produktu IS NULL OR vat_perc IS NULL OR vat_dec IS NULL OR cena_netto_zakupu IS NULL OR 
+cena_brutto_zakupu IS NULL OR cena_netto_sprzedazy IS NULL OR cena_brutto_sprzedazy IS NULL;
+
+SELECT pr.nazwa_produktu AS 'Najchetniej zamawiany produkt', pr.cena_netto_sprzedazy AS 'Cena' , COUNT(z.id_produktu) AS 'Ilosc zamowien'
+FROM zamowienia AS z, produkty AS pr
+WHERE z.id_produktu = pr.id_produktu
+GROUP BY z.id_produktu
+ORDER BY COUNT(z.id_produktu) DESC LIMIT 1;
+
+SELECT data_zamowienia AS 'Dzien z najwieksza iloscia zamowien', COUNT(id_produktu) AS 'Ilosc zamowien'
+FROM zamowienia
+GROUP BY data_zamowienia
+ORDER BY COUNT(id_produktu) DESC LIMIT 1;
