@@ -1,0 +1,11 @@
+def liczby_pierwsze(n):
+    sito = [True for i in range(n)]
+    lista = []
+    for i in range(2,n):
+        if sito[i]:
+            lista.append(i)
+            for j in range(i,n,i):
+                sito[j] = False
+    return lista
+
+liczby_pierwsze(24)
