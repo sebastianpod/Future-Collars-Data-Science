@@ -1,0 +1,13 @@
+#Napisz funkcję, która przyjmie argumenty nazwane imie i wzrost a następnie utworzy wpis do globalnego słownika. Dodaj co najmniej 5 wpisów.
+
+my_dict = {'Imie':[], 'Wzrost':[]} 
+def imie_wzrost(imie,wzrost):
+    my_dict['Imie'] += [imie]
+    my_dict['Wzrost'] += [wzrost]
+    return my_dict
+imie_wzrost('Jacek', '1.78')
+imie_wzrost('Bogdan', '1.88')
+imie_wzrost('Agata', '1.70')
+imie_wzrost('Beata', '1.66')
+imie_wzrost('Paweł', '1.90')
+print(my_dict)
