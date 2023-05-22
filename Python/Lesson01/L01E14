@@ -1,0 +1,4 @@
+#Napisz (przy pomocy rekurencji) funkcję realizującą potęgowanie. Funkcja przyjmuje dwie liczby całkowite, będące podstawą i wykładnikiem potęgi.
+
+def potegowanie(a,n):
+    return 0 if a == 0 else 1 if n == 0 else a if n == 1 else a*potegowanie(a,n-1)
