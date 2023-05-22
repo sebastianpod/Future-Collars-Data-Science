@@ -1,3 +1,6 @@
+#Wybierz kilka państw i stwórz dla każdego słownik, który będzie zawierać dane o nazwie państwa, powierzchni, liczbie mieszkańców, PKB per capita (PPP). Napisz funkcję, 
+która dla listy słowników będzie wypisywać listę państw uszeregowanych według: * powierzchni * liczby ludności * gęstości zaludnienia * PKB per capita (PPP)
+
 kraj1 = {'nazwa': 'polska', 'powierzchnia': 322_575, 'populacja': 37_019_327, 'PPP': 17_318 }
 kraj2 = {'nazwa': 'gruzja', 'powierzchnia': 69_700, 'populacja': 3_718_200, 'PPP': 4370}
 kraj3 = {'nazwa': 'włochy', 'powierzchnia':  302_073, 'populacja': 60_483_973, 'PPP': 35_914}
