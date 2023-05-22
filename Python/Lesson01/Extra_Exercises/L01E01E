@@ -1,0 +1,17 @@
+#Stwórz klasę Pamiętnik, która zaimplementuje metody do odczytywania i dopisywania zawartości. Zawartość będzie przechowywana w pliku tekstowym.
+
+class Pamietnik():
+    def __init__(self,plik):
+        self.plik = plik
+        
+    def zapis(self, tekst):
+        with open(self.plik , 'a') as p:
+            p.write(tekst)
+            p.write('\n')      
+        
+    def odczyt(self):
+        try:
+            with open(self.plik) as p:
+                print(p.read())
+        except:
+            print('Nie odnaleziono pliku!')
