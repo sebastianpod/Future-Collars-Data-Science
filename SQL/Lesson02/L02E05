@@ -1,0 +1,47 @@
+DROP DATABASE IF EXISTS pracownicy;
+CREATE DATABASE IF NOT EXISTS pracownicy;
+USE pracownicy;
+DROP TABLE IF EXISTS pracownicy;
+CREATE TABLE IF NOT EXISTS pracownicy
+(
+id INTEGER PRIMARY KEY AUTO_INCREMENT,
+imie TEXT,
+nazwisko TEXT,
+wiek INTEGER,
+kurs TEXT
+);
+
+INSERT INTO Pracownicy (Imie, Nazwisko, Wiek, Kurs)
+	VALUES
+('Anna','NOWAK', 34, 'DS.'),
+('Roman', 'KOWALSKI', 42, 'DS.'),
+('Tomasz', 'WIŚNIEWSKI', 33, 'DS.'),
+('Anna', NULL, 43,	'DS.'),
+('Elżbieta', 'KOWALCZYK', NULL, 'Tester'),
+('Anna', NULL, NULL, 'Java'),
+('Robert', NULL, NULL, 'Java'),
+('Radosław', 'ZIELIŃSKI', NULL, 'Java'),
+('Robert', 'WOŹNIAK',	NULL,	'Java'),
+('Robert', 'SZYMAŃSKI',	34,	'Tester'),
+('Radosław', 'DĄBROWSKI', 35, NULL),
+('Robert', 'KOZŁOWSKI',	NULL, 'UX'),
+('Joanna', 'MAZUR',	26,	'UX'),
+('Radosław', 'JANKOWSKI', 27, 'UX'),
+('Patryk', 'LEWANDOWSKI', 28, 'Tester'),
+(NULL, 'ZIELIŃSKI',	28,	'Tester'),
+('Andrzej',	'WOŹNIAK', 31, 'Tester'),
+('Andrzej', 'LEWANDOWSKI', '30', 'Tester'),
+('Roman', 'ZIELIŃSKI', 39, 'Tester'),
+('Ewa', 'WOŹNIAK', 31, 'Tester');
+
+SELECT DISTINCT imie FROM pracownicy WHERE imie IS NOT NULL ORDER BY imie;
+
+SELECT DISTINCT nazwisko FROM pracownicy WHERE nazwisko IS NOT NULL ORDER BY nazwisko;
+
+SELECT kurs FROM pracownicy WHERE nazwisko LIKE 'kowalczyk';
+
+SELECT * FROM pracownicy WHERE wiek IS NULL;
+
+SELECT wiek FROM pracownicy WHERE imie LIKE 'patryk';
+
+ALTER TABLE pracownicy RENAME TO mentorzy;
