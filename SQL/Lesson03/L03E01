@@ -1,0 +1,95 @@
+DROP DATABASE IF EXISTS courses;
+CREATE DATABASE IF NOT EXISTS courses;
+USE courses;
+DROP TABLE IF EXISTS students;
+CREATE TABLE students
+(
+id INTEGER UNIQUE NOT NULL,
+name_ TEXT,
+sex CHAR(1),
+date_of_birth DATE,
+exam_points DOUBLE,
+CHECK (sex LIKE 'F' OR SEX LIKE 'M')
+);
+
+DROP TABLE students;
+
+CREATE TABLE students
+(
+id INTEGER UNIQUE NOT NULL,
+name_ TEXT,
+sex CHAR(1),
+date_of_birth DATE,
+exam_points DOUBLE,
+CHECK (sex LIKE 'F' OR SEX LIKE 'M')
+);
+
+INSERT INTO students 
+	VALUES
+(1, 'Natalia', 'F', '1960-02-03', 98.06),
+(2, 'Karolina', 'F', '1991-11-02', 59.27),
+(3, 'Tomasz', 'M', '2000-01-01', 45.13),
+(4, 'Kascper', 'M', '1980-09-16', 79.25);
+
+#INSERT INTO students VALUES (4, 'Kascper', 'M', '1980-09-16', 79.25);
+
+INSERT INTO students VALUES (5, 'Kascper', 'M', '1980-09-16', 79.25);
+
+INSERT INTO students VALUES (6, 'Igor', 'M', '1997-02-04', 55.54);
+
+INSERT INTO students (id, name_) VALUES (7, 'Janusz');
+
+#INSERT INTO students VALUES (8, 'Janina'); Wyrzuca błąd
+
+SELECT id, name_, sex, date_of_birth, exam_points FROM students;
+
+SELECT * FROM students;
+
+SELECT id, name_ FROM students;
+
+SELECT date_of_birth, name_ FROM students;
+
+ALTER TABLE students ADD COLUMN age INTEGER;
+
+ALTER TABLE students MODIFY age DATE;
+
+ALTER TABLE students DROP COLUMN age;
+
+ALTER TABLE students RENAME clouds;
+
+ALTER TABLE clouds RENAME students;
+
+SELECT * FROM students WHERE name_ LIKE 'Tomasz';
+
+SELECT id FROM students WHERE name_ LIKE 'Tomasz';
+
+SELECT * FROM students WHERE id = 4;
+
+UPDATE students SET date_of_birth = '1990-01-31' WHERE id = 4;
+
+UPDATE students SET exam_points = 90 WHERE name_ LIKE 'Kacper';
+
+UPDATE students SET name_ = 'Roman', sex = 'M' WHERE id = 1;
+
+UPDATE students SET exam_points = 100;
+
+SELECT * FROM students;
+
+DELETE FROM students WHERE name_ LIKE 'Igor';
+
+DELETE FROM students;
+
+SELECT * FROM students;
+
+CREATE TABLE students2
+(
+id INTEGER NOT NULL, 
+name_ TEXT NOT NULL,
+sex CHAR(1),
+date_of_birth DATE,
+exam_points DOUBLE DEFAULT 0,
+CHECK (sex LIKE 'F' OR SEX LIKE 'M'),
+CHECK (date_of_birth <= '2020-03-02')
+);
+
+ALTER TABLE students2 ADD CONSTRAINT id_pk PRIMARY KEY (id);
