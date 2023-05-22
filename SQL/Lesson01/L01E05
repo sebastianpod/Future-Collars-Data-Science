@@ -1,0 +1,39 @@
+DROP DATABASE IF EXISTS workers;
+CREATE DATABASE IF NOT EXISTS workers;
+USE workers;
+DROP TABLE IF EXISTS workers_list;
+CREATE TABLE IF NOT EXISTS workers_list
+(
+id INTEGER PRIMARY KEY AUTO_INCREMENT,
+imie TEXT NOT NULL,
+nazwisko TEXT NOT NULL,
+stanowisko TEXT NOT NULL,
+dzial TEXT NOT NULL
+);
+
+INSERT INTO workers_list (imie , nazwisko , stanowisko , dzial) 
+	VALUES
+('Paweł', 'Piotrowski', 'Inżynier produkcji', 'Produkcja'),
+('Ewelina', 'Nowak', 'Księgowa', 'Administracja'),
+('Karolina', 'Kowalska', 'Zakupowiec', 'Logistyka'),
+('Sebastian', 'Podsiadło', 'Robotyk', 'R&D'),
+('Michał', 'Twardowski', 'Metrolog', 'Kontrola jakości');
+
+SELECT * FROM workers_list;
+
+ALTER TABLE workers_list
+ADD COLUMN data_zatrudnienia DATE;
+
+INSERT INTO workers_list (imie , nazwisko , stanowisko , dzial , data_zatrudnienia)
+	VALUES
+('Andrzej' , 'Adamczyk' , 'Pijak' , 'Bar' , '2022-01-03');
+
+SELECT * FROM workers_list;
+
+UPDATE workers_list SET Data_zatrudnienia = '2010-10-01' WHERE ID = 1;
+UPDATE workers_list SET Data_zatrudnienia = '2005-06-15' WHERE ID = 2;
+UPDATE workers_list SET Data_zatrudnienia = '2017-05-05' WHERE ID = 3;
+UPDATE workers_list SET Data_zatrudnienia = '2010-07-11' WHERE ID = 4;
+UPDATE workers_list SET Data_zatrudnienia = '2022-09-01' WHERE ID = 5;
+
+SELECT * FROM workers_list;
